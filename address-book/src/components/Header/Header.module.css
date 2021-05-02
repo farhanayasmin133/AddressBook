@@ -1,19 +1,19 @@
-.Header{
-    height: 160px;
-    width: 100%;
-    background-color: #c7d5eb;
-    display: flex;
-    align-items: center;
-    box-sizing: 0 20px;
-    box-sizing: border-box;
+.Header {
+  height: 152px;
+  width: 100%;
+  border: 1px solid orange;
+  background-color: #fad4a0;
+  display: flex;
+  align-items: center;
+  box-sizing: 0 20px;
+  box-sizing: border-box;
 }
 
-
-.HeaderImage{
-    width: 400px;
-    height: 150px;
+.HeaderImage {
+  width: 400px;
+  height: 150px;
 }
 
-.Header h1{
-    margin: 40px;
+.Header h1 {
+  margin-left: 50px;
 }

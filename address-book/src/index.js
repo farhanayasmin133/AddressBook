@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 
 import './index.css';
 import App from './App';
@@ -8,6 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import reducer from './Store/reducer';
 import { createStore } from 'redux';
 
+//Creating store by passing reducer and injecting store into React Components
 const store = createStore(reducer);
 ReactDOM.render(
   <React.StrictMode>

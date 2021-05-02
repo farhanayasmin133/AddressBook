@@ -1,42 +1,42 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React from 'react';
+//importing connect as a named export to connect AddressBook component to Redux store
+import { connect } from 'react-redux';
 import Person from '../../components/Person/Person';
-import Auxialiary from '../../hoc/Auxiliary/Auxiliary';
 
-class AddressBook extends Component{
-
-    render(){
-        let persons=null;
-        if(this.props.persons){
-            persons = this.props.persons.map(person => {
-                return <Person
-                    key={Person.id}
-                    clicked={() => this.props.onPersonClicked(person.id)}
-                    name={person.name}
-                    address={person.address}
-                    showAddress={person.showAddress}
-                 />
-            });
-        }
-        
-        return(
-            <Auxialiary>
-                 {persons}
-            </Auxialiary>
-        );
+/**
+ * Creating the addressbook container that displays a list of persons.
+ */
+const addressBook = (props) => {
+    let persons = null;
+    if (props.persons) {
+        persons = props.persons.map(person => {
+            return <Person
+                key={Person.id}
+                clicked={() => props.onPersonClicked(person.id)}
+                name={person.name}
+                address={person.address}
+                showAddress={person.showAddress}
+            />
+        });
     }
+
+    return (
+        <div>
+            {persons}
+        </div>
+    );
 }
 
 const mapStateToProps = state => {
     return {
-        persons : state.persons
+        persons: state.persons
     };
 }
-
+// Dispatching actions
 const mapDispatchToProps = dispatch => {
     return {
-        onPersonClicked: (id) => dispatch({type: 'PERSON_CLICKED', id:id})
+        onPersonClicked: id => dispatch({ type: 'PERSON_CLICKED', id: id })
     }
 }
-
-export default connect(mapStateToProps,mapDispatchToProps)(AddressBook);
+// Connecting AddressBook component to Redux store
+export default connect(mapStateToProps, mapDispatchToProps)(addressBook);
