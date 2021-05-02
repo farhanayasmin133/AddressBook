@@ -1,7 +1,7 @@
 # Address Book
 The address book displays a list of persons' names. If a name is clicked the address of that person is shown/hidden. If there is no address associated with the person then an error message is displayed.
 
-# Instructions
+## Instructions
 1. Run `npm install` to install all the dependencies.
 2. Run `npm start` to start the application.
 
