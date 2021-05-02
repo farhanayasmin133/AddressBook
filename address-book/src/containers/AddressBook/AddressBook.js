@@ -1,49 +1,42 @@
 import React, {Component} from 'react';
-import Persons from '../../components/Persons/Persons';
+import {connect} from 'react-redux';
+import Person from '../../components/Person/Person';
+import Auxialiary from '../../hoc/Auxiliary/Auxiliary';
 
 class AddressBook extends Component{
-    state={
-        persons:[
-            {id:'hdfhiuw',
-             name: 'John Doe', 
-             address: '100, Queen St N, Kitchener, Canada, N2H2H6',
-             showAddress:false
-            },
-            {id:'2922ghj',
-             name: 'John Doe', 
-             address: '100, Queen St N, Kitchener, Canada, N2H2H6',
-             showAddress:false
-            },
-            {id:'sgey19',
-             name: 'John Doe',
-             showAddress:false
-            },
-            {id:'298whd',
-             name: 'John Doe', 
-             address: '100, Queen St N, Kitchener, Canada, N2H2H6',
-             showAddress:false
-            }
-        ]
-    }
 
-    personClickHandler = (id) =>{
-        const personClickedIndex = this.state.persons.findIndex(person =>{
-            return person.id === id;
-        } );
-
-        const person = {...this.state.persons[personClickedIndex]};
-        person.showAddress = !person.showAddress;
-        const persons = [...this.state.persons];
-        persons[personClickedIndex] = person;
-
-        this.setState({persons: persons});
-    }
     render(){
+        let persons=null;
+        if(this.props.persons){
+            persons = this.props.persons.map(person => {
+                return <Person
+                    key={Person.id}
+                    clicked={() => this.props.onPersonClicked(person.id)}
+                    name={person.name}
+                    address={person.address}
+                    showAddress={person.showAddress}
+                 />
+            });
+        }
         
         return(
-            <Persons persons={this.state.persons} clicked={this.personClickHandler}/>
+            <Auxialiary>
+                 {persons}
+            </Auxialiary>
         );
     }
 }
 
-export default AddressBook;
+const mapStateToProps = state => {
+    return {
+        persons : state.persons
+    };
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        onPersonClicked: (id) => dispatch({type: 'PERSON_CLICKED', id:id})
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(AddressBook);
